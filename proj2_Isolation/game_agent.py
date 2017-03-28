@@ -122,12 +122,6 @@ class CustomPlayer:
 
         self.time_left = time_left
 
-        # TODO: finish this function!
-        # Perform any required initializations, including selecting an initial
-        # move from the game board (i.e., an opening book), or returning
-        # immediately if there are no legal moves
-
-        # returns if there are no moves, or the center if all moves remaining
         if not legal_moves:
             return (-1, -1)
         if len(legal_moves) == (game.width*game.height): 
@@ -154,11 +148,9 @@ class CustomPlayer:
                 if self.method == "alphabeta":
                     _, curBestMove = self.alphabeta(game, self.search_depth) 
         except Timeout:
-            # Handle any actions required at timeout, if necessary
             return curBestMove
 
         return curBestMove
-        # Return the best move from the last completed search iteration
 
 
     def minFinder(self, game, curDepth):
