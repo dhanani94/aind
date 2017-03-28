@@ -161,16 +161,31 @@ class CustomPlayer:
         # Return the best move from the last completed search iteration
 
 
-    def minFinder(self, game, curDepth, finalDepth):
-        if (curDepth == finalDepth):
+    def minFinder(self, game, curDepth):
+        moves = game.get_legal_moves()
+        minScore = float("-inf")
+        minMove = (-1, -1)
+        if (curDepth <= 0 or not moves):
             return self.score(game, self), game.get_player_location(self)
-        return min([(self.maxFinder(game.forecast_move(move), curDepth + 1, finalDepth)) for move in game.get_legal_moves(game.get_opponent(self))])
+        for move in moves:
+            maxScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
+            if maxScore < minScore:
+                minScore = maxScore
+                minMove = move
+        return minScore, minMove
                                                                         
-    def maxFinder(self, game, curDepth, finalDepth):
-        if (curDepth >= finalDepth):
+    def maxFinder(self, game, curDepth):
+        moves = game.get_legal_moves()
+        maxScore = float("inf")
+        maxMove = (-1, -1)
+        if (curDepth <= 0 or not moves):
             return self.score(game, self), game.get_player_location(self)
-        return max([(self.minFinder(game.forecast_move(move), curDepth + 1, finalDepth)) for move in game.get_legal_moves(self)])
-                                
+        for move in moves:
+            minScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
+            if minScore < maxScore:
+                maxScore = minScore
+                maxMove = move
+        return maxScore, maxMove               
                                                 
     def minimax(self, game, depth, maximizing_player=True):
         """Implement the minimax search algorithm as described in the lectures.
@@ -208,9 +223,9 @@ class CustomPlayer:
         if (depth <= 0):
             return -1, (-1, -1)
         if (maximizing_player):
-            return self.maxFinder(game, 0, depth)
+            return self.maxFinder(game, depth)
         else:
-            return self.minFinder(game, 0, depth)
+            return self.minFinder(game, depth)
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"), maximizing_player=True):
         """Implement minimax search with alpha-beta pruning as described in the
