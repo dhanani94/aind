@@ -163,27 +163,27 @@ class CustomPlayer:
 
     def minFinder(self, game, curDepth):
         moves = game.get_legal_moves()
-        minScore = float("-inf")
-        minMove = (-1, -1)
+        minScore = float("inf")
+        minMove = game.get_player_location(self)
         if (curDepth <= 0 or not moves):
-            return self.score(game, self), game.get_player_location(self)
+            return self.score(game, self), minMove
         for move in moves:
-            maxScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
-            if maxScore < minScore:
-                minScore = maxScore
+            tempScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
+            if tempScore < minScore:
+                minScore = tempScore
                 minMove = move
         return minScore, minMove
                                                                         
     def maxFinder(self, game, curDepth):
         moves = game.get_legal_moves()
-        maxScore = float("inf")
-        maxMove = (-1, -1)
+        maxScore = float("-inf")
+        maxMove = game.get_player_location(self)
         if (curDepth <= 0 or not moves):
-            return self.score(game, self), game.get_player_location(self)
+            return self.score(game, self), maxMove
         for move in moves:
-            minScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
-            if minScore < maxScore:
-                maxScore = minScore
+            tempScore, _ = self.minFinder(game.forecast_move(move), curDepth -1)
+            if tempScore > maxScore:
+                maxScore = tempScore
                 maxMove = move
         return maxScore, maxMove               
                                                 
@@ -220,8 +220,6 @@ class CustomPlayer:
         """
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
-        if (depth <= 0):
-            return -1, (-1, -1)
         if (maximizing_player):
             return self.maxFinder(game, depth)
         else:
