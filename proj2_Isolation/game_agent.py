@@ -156,7 +156,6 @@ class CustomPlayer:
         except Timeout:
             # Handle any actions required at timeout, if necessary
             return curBestMove
-            pass
 
         return curBestMove
         # Return the best move from the last completed search iteration
