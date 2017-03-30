@@ -157,7 +157,7 @@ class CustomPlayer:
         moves = game.get_legal_moves()
         minScore = float("inf")
         minMove = game.get_player_location(self)
-        if (curDepth <= 0 or not moves):
+        if (curDepth <= 0):
             return self.score(game, self), minMove
         for move in moves:
             tempScore, _ = self.maxFinder(game.forecast_move(move), curDepth -1)
@@ -170,7 +170,7 @@ class CustomPlayer:
         moves = game.get_legal_moves()
         maxScore = float("-inf")
         maxMove = game.get_player_location(self)
-        if (curDepth <= 0 or not moves):
+        if (curDepth <= 0):
             return self.score(game, self), maxMove
         for move in moves:
             tempScore, _ = self.minFinder(game.forecast_move(move), curDepth -1)
@@ -258,5 +258,33 @@ class CustomPlayer:
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
-        # TODO: finish this function!
-        raise NotImplementedError
+        moves = game.get_legal_moves(self);
+        bestScore = float("-inf") if maximizing_player else float("inf")
+        bestMove = game.get_player_location(self)
+        if (depth == 0 or not moves):
+            return self.score(game, self), bestMove
+        for move in moves:
+                forcast = game.forecast_move(move)
+                tempScore, _ = self.alphabeta(forcast, depth - 1, alpha, beta, not maximizing_player)
+
+        if (maximizing_player):
+            if (alpha == float("inf")):
+                return self.score(game, self), bestMove
+            
+                if tempScore > bestScore:
+                    bestScore = tempScore
+                    bestMove = move
+                alpha = max(alpha, bestScore)
+                if (beta <= alpha):
+                    break  
+            return bestScore, bestMove
+        else:
+            if (beta == float("-inf")):
+                return self.score(game, self), bestMove
+                if tempScore < bestScore:
+                    bestScore = tempScore
+                    bestMove = move
+                beta = min(beta, bestScore)
+                if (beta <= alpha):
+                    break  
+            return bestScore, bestMove
