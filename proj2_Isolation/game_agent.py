@@ -258,33 +258,37 @@ class CustomPlayer:
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
-        moves = game.get_legal_moves(self);
+        moves = game.get_legal_moves();
         bestScore = float("-inf") if maximizing_player else float("inf")
         bestMove = game.get_player_location(self)
-        if (depth == 0 or not moves):
+
+        if (depth == 0):
             return self.score(game, self), bestMove
         for move in moves:
-                forcast = game.forecast_move(move)
-                tempScore, _ = self.alphabeta(forcast, depth - 1, alpha, beta, not maximizing_player)
-
-        if (maximizing_player):
-            if (alpha == float("inf")):
-                return self.score(game, self), bestMove
-            
+            forcast = game.forecast_move(move)
+            tempScore, _ = self.alphabeta(forcast, depth - 1, alpha, beta, not maximizing_player)
+            if (maximizing_player):
                 if tempScore > bestScore:
                     bestScore = tempScore
                     bestMove = move
-                alpha = max(alpha, bestScore)
-                if (beta <= alpha):
+                if (bestScore >= beta):
                     break  
-            return bestScore, bestMove
-        else:
-            if (beta == float("-inf")):
-                return self.score(game, self), bestMove
+                alpha = max(alpha, bestScore)
+            else:
                 if tempScore < bestScore:
                     bestScore = tempScore
                     bestMove = move
-                beta = min(beta, bestScore)
-                if (beta <= alpha):
+                if (bestScore <= alpha):
                     break  
-            return bestScore, bestMove
+                beta = min(beta, bestScore)
+        return bestScore, bestMove
+
+
+
+
+
+
+
+
+
+
