@@ -7,6 +7,7 @@ You must test your agent's strength against a set of agents with known
 relative strength using tournament.py and include the results in your report.
 """
 import random
+import math
 
 
 class Timeout(Exception):
@@ -26,14 +27,21 @@ def maxMoves(game, player):
 
 def maxUnsharedMoves(game, player):
     oppenent = game.get_opponent(player)
-
     playerMoves = game.get_legal_moves(player)
     oppenentMoves = game.get_legal_moves(oppenent)
     sharedMoves = list(set(playerMoves) & set(oppenentMoves))
-
     lenShared = len(sharedMoves)
     lenUnshared = len(playerMoves) - lenShared
     return float(2*lenUnshared + lenShared)
+
+def maxUnsharedMoveSumOfSquare(game, player):
+    oppenent = game.get_opponent(player)
+    playerMoves = game.get_legal_moves(player)
+    oppenentMoves = game.get_legal_moves(oppenent)
+    sharedMoves = list(set(playerMoves) & set(oppenentMoves))
+    lenShared = len(sharedMoves)
+    lenUnshared = len(playerMoves) - lenShared
+    return float(math.sqrt(2*lenUnshared*lenUnshared + lenShared*lenShared))
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -57,7 +65,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return maxUnsharedMoves(game,player)
+    return maxUnsharedMoveSumOfSquare(game,player)
 
 
 class CustomPlayer:
