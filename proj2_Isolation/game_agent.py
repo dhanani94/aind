@@ -14,6 +14,27 @@ class Timeout(Exception):
     pass
 
 
+def differencesScore(game, player):
+    numPlayerMove = len(game.get_legal_moves(player))
+    oppenent = game.get_opponent(player)
+    numOppenentMove = len(game.get_legal_moves(oppenent))
+    return(float(numPlayerMove - numOppenentMove))
+
+def maxMoves(game, player):
+    numPlayerMove = len(game.get_legal_moves(player))
+    return(float(numPlayerMove))
+
+def maxUnsharedMoves(game, player):
+    oppenent = game.get_opponent(player)
+
+    playerMoves = game.get_legal_moves(player)
+    oppenentMoves = game.get_legal_moves(oppenent)
+    sharedMoves = list(set(playerMoves) & set(oppenentMoves))
+
+    lenShared = len(sharedMoves)
+    lenUnshared = len(playerMoves) - lenShared
+    return float(2*lenUnshared + lenShared)
+
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
     of the given player.
@@ -36,13 +57,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # score is the number of moves this dude can make from this point yeah?
-    # there are max 8 number of moves 
-    # returns the number of legal moves this guy can make
-    numPlayerMove = len(game.get_legal_moves(player))
-    oppenent = game.get_opponent(player)
-    numOppenentMove = len(game.get_legal_moves(oppenent))
-    return(float(numPlayerMove - numOppenentMove))
+    return maxUnsharedMoves(game,player)
 
 
 class CustomPlayer:
