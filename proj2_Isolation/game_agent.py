@@ -25,7 +25,18 @@ def maxMoves(game, player):
     numPlayerMove = len(game.get_legal_moves(player))
     return(float(numPlayerMove))
 
-def maxUnsharedMoves(game, player):
+def unsharedMovesPenalty(game, player):
+    oppenent = game.get_opponent(player)
+    playerMoves = game.get_legal_moves(player)
+    oppenentMoves = game.get_legal_moves(oppenent)
+    sharedMoves = list(set(playerMoves) & set(oppenentMoves))
+    lenShared = len(sharedMoves)
+    lenPlayer = len(playerMoves) - lenShared
+    lenOppenent = len(oppenentMoves) - lenShared
+    return float(2*lenPlayer + lenShared - lenOppenent)
+
+
+def unsharedMovesWeighted(game, player):
     oppenent = game.get_opponent(player)
     playerMoves = game.get_legal_moves(player)
     oppenentMoves = game.get_legal_moves(oppenent)
@@ -34,14 +45,12 @@ def maxUnsharedMoves(game, player):
     lenUnshared = len(playerMoves) - lenShared
     return float(2*lenUnshared + lenShared)
 
-def maxUnsharedMoveSumOfSquare(game, player):
+def unsharedMoves(game, player):
     oppenent = game.get_opponent(player)
     playerMoves = game.get_legal_moves(player)
     oppenentMoves = game.get_legal_moves(oppenent)
     sharedMoves = list(set(playerMoves) & set(oppenentMoves))
-    lenShared = len(sharedMoves)
-    lenUnshared = len(playerMoves) - lenShared
-    return float(math.sqrt(2*lenUnshared*lenUnshared + lenShared*lenShared))
+    return len(playerMoves) - len(sharedMoves)
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -65,7 +74,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return maxUnsharedMoveSumOfSquare(game,player)
+    return unsharedMovesPenalty(game,player)
 
 
 class CustomPlayer:
