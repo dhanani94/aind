@@ -1,0 +1,110 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Problem 3 ###
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 3
+breadth_first_search
+
+Expansions   Goal Tests   New Nodes
+  14663       18098       129631
+
+Plan length: 12  
+Time elapsed in seconds: 98.27287155499653
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 3
+depth_first_graph_search
+
+Expansions   Goal Tests   New Nodes
+   408         409         3364
+
+Plan length: 392  
+Time elapsed in seconds: 1.727445472999534
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 3
+astar_search
+
+Expansions   Goal Tests   New Nodes
+  18151       18153       159038
+
+Plan length: 12  
+Time elapsed in seconds: 52.19504039900494
+
+
+
+
+
+
+
+### problem 2 ###
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 2
+breadth_first_search
+
+Expansions   Goal Tests   New Nodes
+   3343        4609       30509
+
+Plan length: 9  
+Time elapsed in seconds: 14.45328240100207
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 2
+depth_first_graph_search
+
+Expansions   Goal Tests   New Nodes
+   624         625         5602
+
+Plan length: 619  
+Time elapsed in seconds: 3.6070182740004384
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 2
+astar_search
+
+Expansions   Goal Tests   New Nodes
+   4853        4855       44041
+
+Plan length: 9  
+Time elapsed in seconds: 12.862359409999044
+
+
+
+
+
+
+
+### problem 1 ###
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 1
+breadth_first_search
+
+Expansions   Goal Tests   New Nodes
+    43          56         180
+
+Plan length: 6  
+Time elapsed in seconds: 0.030000831000506878
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 1
+depth_first_graph_search
+
+Expansions   Goal Tests   New Nodes
+    21          22          84
+
+Plan length: 20  
+Time elapsed in seconds: 0.015821666005649604
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problem 1
+astar_search
+
+Expansions   Goal Tests   New Nodes
+    55          57         224
+
+Plan length: 6  
+Time elapsed in seconds: 0.035987076997116674
+

@@ -1,0 +1,62 @@
+### PROBLEM 1i ###
+
+Solving Air Cargo Problem 1 using breadth_first_search...
+
+Expansions   Goal Tests   New Nodes
+    43          56         180
+
+Plan length: 6  Time elapsed in seconds: 0.028223446999618318
+Load(C1, P1, SFO)
+Load(C2, P2, JFK)
+Fly(P2, JFK, SFO)
+Load(C2, P2, SFO)
+Fly(P1, SFO, JFK)
+Load(C1, P1, JFK)
+
+➜  proj3 planning git:(master) ✗ python3 run_search.py -p 1 -s 2
+
+Solving Air Cargo Problem 1 using breadth_first_tree_search...
+
+Expansions   Goal Tests   New Nodes
+   1458        1459        5960
+
+Plan length: 6  Time elapsed in seconds: 0.882286332998774
+Load(C1, P1, SFO)
+Load(C2, P2, JFK)
+Fly(P2, JFK, SFO)
+Load(C2, P2, SFO)
+Fly(P1, SFO, JFK)
+Load(C1, P1, JFK)
+
+➜  proj3 planning git:(master) ✗ python3 run_search.py -p 1 -s 3
+
+Solving Air Cargo Problem 1 using depth_first_graph_search...
+
+Expansions   Goal Tests   New Nodes
+    21          22          84
+
+Plan length: 20  Time elapsed in seconds: 0.013864335996913724
+Fly(P1, SFO, JFK)
+Fly(P2, JFK, SFO)
+Load(C2, P1, JFK)
+Fly(P1, JFK, SFO)
+Fly(P2, SFO, JFK)
+Load(C2, P1, SFO)
+Fly(P1, SFO, JFK)
+Fly(P2, JFK, SFO)
+Load(C2, P2, SFO)
+Fly(P1, JFK, SFO)
+Load(C1, P2, SFO)
+Fly(P2, SFO, JFK)
+Fly(P1, SFO, JFK)
+Load(C2, P2, JFK)
+Load(C1, P2, JFK)
+Fly(P2, JFK, SFO)
+Load(C2, P1, JFK)
+Fly(P1, JFK, SFO)
+Fly(P2, SFO, JFK)
+Load(C2, P1, SFO)
+
+
+
+
