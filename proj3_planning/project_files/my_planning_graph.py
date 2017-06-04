@@ -527,7 +527,6 @@ class PlanningGraph():
         :return: int
         """
         # TODO implement
-
         level_sum = 0
         curLevel = 0
         allGoals = list(self.problem.goal)
