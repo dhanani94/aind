@@ -529,26 +529,14 @@ class PlanningGraph():
         # TODO implement
 
         level_sum = 0
-        num_levels = len(self.s_levels)
-        remaining_goals = list(self.problem.goal)
-        for level in range (0, num_levels):
-            for state in self.s_levels[level]:
-                for goal in remaining_goals:
+        curLevel = 0
+        allGoals = list(self.problem.goal)
+        while (len(allGoals) > 0 and curLevel < len(self.s_levels)):
+            for state in self.s_levels[curLevel]:
+                for goal in allGoals:
                     if goal == state.symbol:
-                        level_sum = level_sum + level
-                        remaining_goals.remove(goal)
+                        level_sum = level_sum + curLevel
+                        allGoals.remove(goal)
+                curLevel = curLevel + 1
         return level_sum
-
-
-        # level_sum = 0
-        # curLevel = 0
-        # allGoals = list(self.problem.goal)
-        # while (len(allGoals) > 0 and curLevel < len(self.s_levels)):
-        #     for state in self.s_levels[curLevel]:
-        #         for goal in allGoals:
-        #             if goal == state.symbol:
-        #                 level_sum = level_sum + curLevel
-        #                 allGoals.remove(goal)
-        #         curLevel = curLevel + 1
-        # return level_sum
 
