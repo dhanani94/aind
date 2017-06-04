@@ -151,56 +151,23 @@ Eff: On(t,b) ^ not On(t,a) ^ Blank(a) ^ not Blank(b)
         2. precodndtion (function free postive literals that must be true) 
         3. effect (function free literal describing how the state changes when action executed) 
     * add list for positive literals and delete list for negative literals 
-    * 
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  * GRAPHPLAN
+    * each level has list of all possible states that could happen next. Also there are mutex links between states that literally can't happen together. 
+    * keep doing this, until the all the new levels dont change (leved off) 
+    * Mutex links can be of three categories:
+      1. Incosnsitent effects: one action negates effect of another
+      2. Interference: one action effects anothers precondition
+      3. Competing needs: two actions need the same precondition and compete for it
+    * planning graph tells if a literal cannot be achieveed by any plan (if it doesn't exist in final level).
+    * Level cost: the level number a certain state shows up. States have level costs
+    * Serial planning graph: adds mutex links between all actions(expect persistence actions) = only one action can happen per step. Level cost in this situation is simialr to actual cost 
+    * max-level heuristic: max level cost of any of the goals (admissible, not accurate)
+    * level-sum heurisitc: sum of level cost of goals (inadmissible but still good)
+    * set-level heuristic: finds level at which all literalls in conjunctive goal appear without being mutex 
+    * graphplan algo: 1. does goal iexis in level with no mutex between any pair, if so then try to extract solution that may exist 2. else expand graph by adding actions for current level and state literals for next level 3. repeat util solutin found in step 1, or leveld off and no soultion 
+    * The extraction phase is just Constrain Satisfaction. 
+      - start with last level, goal state should be there
+      - go back a level and apply all conflict free actions that brought you to the goal state
+      - goal is to reach state at level S0 that all goals are satified, each action cost = 1
+    * early termination: if literalls increase to a limit, actions increase to a limit, and mutexes decrease to a limit
 
