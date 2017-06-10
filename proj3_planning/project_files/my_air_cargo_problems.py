@@ -96,7 +96,7 @@ class AirCargoProblem(Problem):
                         precond_neg = []
                         effect_add = [expr("At({}, {})".format(c, a))]
                         effect_rem = [expr("In({}, {})".format(c, p))]
-                        action = expr("Load({},{},{})".format(c, p, a))
+                        action = expr("Unload({},{},{})".format(c, p, a))
                         unload = Action(action, [precond_pos, precond_neg], [effect_add, effect_rem])
                         unloads.append(unload)
             return unloads
